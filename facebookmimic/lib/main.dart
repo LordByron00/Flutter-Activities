@@ -159,6 +159,7 @@ class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.all(12),
@@ -276,10 +277,119 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          child: Text(
-            'Lord Bayron',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Lord Bayron',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Text('165 friends'),
+              Text(
+                ' I am Batman!',
+                style: TextStyle(fontSize: 18),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              children: [
+                                Image.asset(
+                                  'assets/images/dprian.jpg',
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                                Icon(
+                                  Icons.play_arrow_rounded,
+                                  color: Colors.white,
+                                  size: 27,
+                                ),
+                              ],
+                            ),
+                            Wrap(direction: Axis.vertical, children: [
+                              Text(
+                                'Insanity',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              Text(
+                                'DPR IAN',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ]),
+                          ]),
+                    ),
+                    Icon(Icons.keyboard_control_sharp)
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.blue),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      'Add to story',
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 20,
+                          ),
+                          SizedBox(width: 4),
+                          Text('Edit profile')
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey),
+                      child: Icon(
+                        Icons.keyboard_control,
+                      )),
+                ],
+              ),
+            ],
           ),
         ),
       ],

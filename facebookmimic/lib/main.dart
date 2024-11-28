@@ -52,6 +52,12 @@ class FacebookTopNavBar extends StatelessWidget {
               Tab(icon: Icon(Icons.notifications)),
               Tab(icon: Icon(Icons.settings)),
             ],
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(
+                  width: 4.0, color: Colors.blue), // Blue line highlight
+            ),
+            unselectedLabelColor: Colors.grey, // Grey for inactive tabs
+            labelColor: Colors.blue, // Blue for active tab
           ),
         ),
         body: const TabBarView(
@@ -101,11 +107,102 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Profile Page',
-        style: TextStyle(fontSize: 24),
-      ),
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(width: 35),
+              Text(
+                'Lord Bayron',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Spacer(),
+              Container(
+                width: 25,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: Text("9+", style: TextStyle(color: Colors.white)),
+              ),
+              Icon(
+                Icons.arrow_drop_down_outlined,
+                size: 35,
+              ),
+              CircleAvatar(
+                backgroundColor: const Color.fromARGB(255, 185, 185, 185),
+                child: Stack(children: [
+                  Icon(
+                    Icons.person,
+                    size: 30,
+                    color: const Color.fromARGB(255, 16, 16, 16),
+                  ),
+                  Positioned(
+                      bottom: -3,
+                      right: -3,
+                      child: CircleAvatar(
+                        maxRadius: 10,
+                        backgroundColor:
+                            const Color.fromARGB(255, 185, 185, 185),
+                        child: Icon(
+                          Icons.edit,
+                          size: 13,
+                          color: Color.fromARGB(255, 16, 16, 16),
+                          // fill: 1,
+                        ),
+                      )),
+                ]),
+              )
+            ],
+          ),
+        ),
+        Container(
+          height: 280,
+          child: Stack(
+            children: [
+              Image.asset(
+                'assets/images/dieforme.png',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 220,
+              ),
+              Positioned(
+                left: 25,
+                top: 130,
+                child: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      )),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundColor: Colors.black,
+                    backgroundImage: AssetImage(
+                      'assets/images/profile.jpg',
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 70,
+                left: 300,
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: const Color.fromARGB(255, 22, 22, 22),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

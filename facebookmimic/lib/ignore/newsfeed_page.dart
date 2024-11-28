@@ -1,4 +1,4 @@
-import 'package:facebookmimic/pages/navbar.dart';
+import 'package:facebookmimic/ignore/navbar.dart';
 import 'package:flutter/material.dart';
 
 class NewsFeedPage extends StatelessWidget {

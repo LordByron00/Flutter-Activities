@@ -21,13 +21,13 @@ class NewsFeedPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListTile(
+                const ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(
-                        'https://via.placeholder.com/150'), // Sample profile picture
+                        'https://i.pinimg.com/736x/32/eb/8a/32eb8a8072936e1a66922db5a25586c6.jpg'), // Sample profile picture
                   ),
-                  title: const Text('John Doe'),
-                  subtitle: const Text('2 hours ago'),
+                  title: Text('John Doe'),
+                  subtitle: Text('2 hours ago'),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -37,7 +37,7 @@ class NewsFeedPage extends StatelessWidget {
                   ),
                 ),
                 Image.network(
-                  'https://via.placeholder.com/400x200', // Sample post image
+                  'https://i.pinimg.com/736x/32/eb/8a/32eb8a8072936e1a66922db5a25586c6.jpg', // Sample post image
                   fit: BoxFit.cover,
                 ),
                 Row(

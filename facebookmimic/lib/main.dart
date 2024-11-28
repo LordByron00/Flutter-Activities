@@ -43,14 +43,65 @@ class FacebookTopNavBar extends StatelessWidget {
             ],
           ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.white, // Color of the selected tab underline
             tabs: [
-              Tab(icon: Icon(Icons.home_filled)),
-              Tab(icon: Icon(Icons.group)),
-              Tab(icon: Icon(Icons.person)),
-              Tab(icon: Icon(Icons.notifications)),
-              Tab(icon: Icon(Icons.settings)),
+              const Tab(
+                  icon: Icon(
+                Icons.home_filled,
+                size: 30,
+              )),
+              const Tab(
+                  icon: Icon(
+                Icons.group,
+                size: 30,
+              )),
+              const Tab(
+                  icon: Icon(
+                Icons.person,
+                size: 30,
+              )),
+              const Tab(
+                  icon: Icon(
+                Icons.notifications,
+                size: 30,
+              )),
+              Tab(
+                child: Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 83, 83, 83),
+                              width: 3)),
+                      child: CircleAvatar(
+                        radius: 13,
+                        backgroundImage:
+                            AssetImage('assets/images/profile.jpg'),
+                      ),
+                    ),
+                    Positioned(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 1)),
+                        child: CircleAvatar(
+                          radius: 8,
+                          backgroundColor:
+                              const Color.fromARGB(255, 80, 80, 80),
+                          child: Icon(
+                            Icons.menu,
+                            size: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
             indicator: const UnderlineTabIndicator(
               borderSide: BorderSide(
@@ -158,7 +209,7 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 280,
           child: Stack(
             children: [
@@ -176,7 +227,7 @@ class ProfileTab extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: Colors.white,
-                        width: 2,
+                        width: 3,
                       )),
                   child: CircleAvatar(
                     radius: 70,
@@ -188,18 +239,47 @@ class ProfileTab extends StatelessWidget {
                 ),
               ),
               Positioned(
+                bottom: 10,
+                left: 120,
+                child: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1.5)),
+                  child: CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.grey,
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: const Color.fromARGB(255, 22, 22, 22),
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
                 bottom: 70,
                 left: 300,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.grey,
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: const Color.fromARGB(255, 22, 22, 22),
+                child: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1.5)),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.grey,
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: const Color.fromARGB(255, 22, 22, 22),
+                    ),
                   ),
                 ),
               )
             ],
+          ),
+        ),
+        SizedBox(
+          child: Text(
+            'Lord Bayron',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
       ],

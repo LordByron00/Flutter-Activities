@@ -147,39 +147,39 @@ class FriendsTab extends StatelessWidget {
     final List<Map<String, dynamic>> friendRequests = [
       {
         'profileImage':
-            'assets/images/diddy.jpg', 
-        'name': 'Sean Diddy Combs',
+            'assets/images/peter.jpg', 
+        'name': 'Peter Griffin',
         'mutualFriends': 2,
       },
       {
         'profileImage':
-            'assets/images/profile2.jpg', 
-        'name': 'Bob Smith',
+            'assets/images/butcher.jpg', 
+        'name': 'Billy Butcher',
         'mutualFriends': 3,
       },
       {
         'profileImage':
-            'assets/images/profile3.jpg', 
-        'name': 'Charlie Brown',
+            'assets/images/vader.jpg', 
+        'name': 'Darth Vader',
         'mutualFriends': 2,
       },
       {
         'profileImage':
-            'assets/images/profile4.jpg', 
-        'name': 'Daisy Ridley',
-        'mutualFriends': 8,
-      },
-      {
-        'profileImage':
-            'assets/images/profile5.jpg', 
-        'name': 'Evan Peters',
-        'mutualFriends': 1,
-      },
-      {
-        'profileImage':
-            'assets/images/profile6.jpg',
-        'name': 'Fiona Gallagher',
+            'assets/images/geralt.jpg', 
+        'name': 'Geralt of Rivia',
         'mutualFriends': 6,
+      },
+      {
+        'profileImage':
+            'assets/images/danielle.jpg', 
+        'name': 'Danielle Marsh',
+        'mutualFriends': 3,
+      },
+      {
+        'profileImage':
+            'assets/images/nami.jpg',
+        'name': 'Nami',
+        'mutualFriends': 5,
       },
     ];
 

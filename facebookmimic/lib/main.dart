@@ -138,20 +138,177 @@ class NewsfeedTab extends StatelessWidget {
     );
   }
 }
-
+// every step i take
 class FriendsTab extends StatelessWidget {
   const FriendsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Friends Page',
-        style: TextStyle(fontSize: 24),
+    final List<Map<String, dynamic>> friendRequests = [
+      {
+        'profileImage':
+            'assets/images/diddy.jpg', 
+        'name': 'Sean Diddy Combs',
+        'mutualFriends': 2,
+      },
+      {
+        'profileImage':
+            'assets/images/profile2.jpg', 
+        'name': 'Bob Smith',
+        'mutualFriends': 3,
+      },
+      {
+        'profileImage':
+            'assets/images/profile3.jpg', 
+        'name': 'Charlie Brown',
+        'mutualFriends': 2,
+      },
+      {
+        'profileImage':
+            'assets/images/profile4.jpg', 
+        'name': 'Daisy Ridley',
+        'mutualFriends': 8,
+      },
+      {
+        'profileImage':
+            'assets/images/profile5.jpg', 
+        'name': 'Evan Peters',
+        'mutualFriends': 1,
+      },
+      {
+        'profileImage':
+            'assets/images/profile6.jpg',
+        'name': 'Fiona Gallagher',
+        'mutualFriends': 6,
+      },
+    ];
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                Text(
+                  'Friend Requests',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '(${friendRequests.length})', // Number of friend requests
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: friendRequests.length,
+            itemBuilder: (context, index) {
+              final request = friendRequests[index];
+              return FriendRequestTile(
+                profileImage: request['profileImage']!,
+                name: request['name']!,
+                mutualFriends: request['mutualFriends']!,
+              );
+            },
+          ),
+        ],
       ),
     );
   }
 }
+
+class FriendRequestTile extends StatelessWidget {
+  final String profileImage;
+  final String name;
+  final int mutualFriends;
+
+  const FriendRequestTile({
+    super.key,
+    required this.profileImage,
+    required this.name,
+    required this.mutualFriends,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage(profileImage), // Profile picture
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$mutualFriends mutual friends', // Unique mutual friends count
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: const Text(
+                  'Confirm',
+                  style: TextStyle(
+                    color: Colors.white, // White text for Confirm button
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: const Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});

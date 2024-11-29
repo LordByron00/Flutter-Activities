@@ -343,6 +343,7 @@ class NewsfeedTab extends StatelessWidget {
   }
 }
 
+// every step i take
 class FriendsTab extends StatelessWidget {
   const FriendsTab({super.key});
 
@@ -870,6 +871,7 @@ class ProfileTab extends StatelessWidget {
   }
 }
 
+// NO!tifications
 class NotificationsTab extends StatelessWidget {
   const NotificationsTab({super.key});
 

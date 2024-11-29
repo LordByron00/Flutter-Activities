@@ -553,20 +553,267 @@ class ProfileTab extends StatelessWidget {
     );
   }
 }
-
+// NO!tifications
 class NotificationsTab extends StatelessWidget {
   const NotificationsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Notifications Page',
-        style: TextStyle(fontSize: 24),
+    final List<Map<String, String>> notifications = [
+      {
+        'message': 'Sheldon Cooper liked your post "#Bazinga".',
+        'time': '2 mins ago',
+        'profileImage':
+            'assets/images/sheldon.jpg', 
+        'reaction': 'like', 
+      },
+      {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage':
+            'assets/images/hanni.jpg', 
+        'reaction': 'love', 
+      },
+   {
+        'message': 'George Cooper updated his profile picture.',
+        'time': '1 hour ago',
+        'profileImage':
+            'assets/images/george.jpg', 
+        'reaction': 'update', 
+      },
+      {
+        'message': 'Hanni Pham reacted to your story.',
+        'time': '5 hours ago',
+        'profileImage':
+            'assets/images/hanni.jpg', 
+        'reaction': 'wow', 
+      },
+      {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage':
+            'assets/images/hanni.jpg', 
+        'reaction': 'love', 
+      },
+      {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage':
+            'assets/images/hanni.jpg', 
+        'reaction': 'love', 
+      },
+      {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage':
+            'assets/images/hanni.jpg', 
+        'reaction': 'love', 
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+       {
+        'message': 'Hanni Pham reacted to your photo.',
+        'time': '10 mins ago',
+        'profileImage': 'assets/images/hanni.jpg',
+        'reaction': 'love',
+      },
+      
+    ];
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: notifications.map((notification) {
+          return NotificationTile(
+            message: notification['message']!,
+            time: notification['time']!,
+            profileImage: notification['profileImage']!,
+            reaction: notification['reaction']!, // Passing the reaction type
+          );
+        }).toList(),
       ),
     );
   }
 }
+
+class NotificationTile extends StatelessWidget {
+  final String message;
+  final String time;
+  final String profileImage;
+  final String
+      reaction; // Added reaction to differentiate between different reactions
+
+  const NotificationTile({
+    super.key,
+    required this.message,
+    required this.time,
+    required this.profileImage,
+    required this.reaction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      child: Row(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              // Profile image
+              CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage(profileImage), // Profile picture
+              ),
+              
+              if (reaction != 'update') ...[
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(
+                        4), 
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue, 
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: _getReactionIcon(
+                        reaction), 
+                  ),
+                ),
+              ],
+            ],
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  time,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Function to return the correct reaction icon
+Widget _getReactionIcon(String reaction) {
+    String imagePath = '';
+
+    // Assign the appropriate image path based on the reaction type
+    switch (reaction) {
+      case 'like':
+        imagePath = 'assets/icons/like.png';
+        break;
+      case 'love':
+        imagePath = 'assets/icons/love.png';
+        break;
+      case 'haha':
+        imagePath = 'assets/icons/haha.png';
+        break;
+      case 'sad':
+        imagePath = 'assets/icons/sad.png';
+        break;
+      case 'wow':
+        imagePath = 'assets/icons/wow.png';
+        break;
+      case 'angry':
+        imagePath = 'assets/icons/angry.png';
+        break;
+      case 'update':
+        imagePath = 'assets/icons/update.png';
+        break;
+      default:
+        return Container(); 
+    }
+
+    return GestureDetector(
+      onTap: () {
+    
+      },
+      child: Container(
+        padding: EdgeInsets.all(0), 
+        margin: EdgeInsets.all(0), 
+        decoration: BoxDecoration(
+
+          border: Border.all(color: Colors.transparent),
+          color: Colors.transparent,
+        ),
+        child: Image.asset(
+          imagePath,
+          width: 20, 
+          height: 20, 
+          fit: BoxFit.cover, 
+        ),
+      ),
+    );
+  }
+
+
+}
+
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});

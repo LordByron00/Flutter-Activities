@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:facebookmimic/models/user_data.dart'; // Import the user data file
 
 void main() {
-  print('Total users: ${users.length}');
-  for (var user in users) {
-    print('${user.name} has ${user.posts.length} posts.');
-  }
-
   runApp(const FacebookTopNavApp());
 }
 
@@ -39,15 +33,12 @@ class FacebookTopNavBar extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // const Icon(Icons.facebook, color: Colors.blue),
-              const SizedBox(width: 8),
-              Text('Facebook',
+              const Icon(Icons.facebook, color: Colors.blue),
+              const SizedBox(width: 8), // Add space between icon and text
+              const Text('Facebook',
                   style: TextStyle(color: Colors.blue, fontSize: 20)),
-              Spacer(), // Add space between icon and text
               Icon(Icons.add_circle_sharp, color: Colors.black),
-              SizedBox(width: 15),
               const Icon(Icons.search, color: Colors.black),
-              SizedBox(width: 15),
               Image.asset('assets/icons/chat.png'),
             ],
           ),
@@ -139,210 +130,16 @@ class NewsfeedTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
-          ),
-          elevation: 2,
-          // margin: const EdgeInsets.all(10),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage(
-                      'assets/images/profile.jpg'), // User profile pic
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(2.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.grey, width: 1)),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: "What's on your mind?",
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.photo_rounded, color: Colors.green),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 165,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(users.length, (index) {
-                return Card(
-                  clipBehavior: Clip.hardEdge,
-                  color: Colors.grey,
-                  child: SizedBox(
-                    height: double.infinity,
-                    width: 95,
-                    child: Stack(
-                      children: [
-                        Positioned(
-                            child: Image.asset(
-                          users[index].stories[0].image,
-                          fit: BoxFit.cover,
-                          height: double.infinity,
-                        )),
-                        Positioned(
-                          top: 5,
-                          left: 12,
-                          child: CircleAvatar(
-                            radius: 15,
-                            backgroundImage: AssetImage(
-                                users[index].profile), // Story images
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 15,
-                          left: 10,
-                          child: Text(users[index].name,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10)),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-        ),
-        ListView.builder(
-          physics:
-              NeverScrollableScrollPhysics(), // Disable scrolling within ListView
-          shrinkWrap: true, // Allow ListView to fit inside the parent
-          itemCount: users.length, // Number of posts
-          itemBuilder: (context, index) {
-            final user = users[index];
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border(
-                  top: BorderSide(
-                      color: const Color.fromARGB(255, 181, 181, 181),
-                      width: 4.0),
-                ),
-              ),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-                margin: const EdgeInsets.all(0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage(user.profile),
-                      ),
-                      title: Text(user.name),
-                      subtitle: Text(user.posts[0].timePosted),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(user.posts[0].caption),
-                    ),
-                    Image.asset(
-                      user.posts[0].images[0], // Post images
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Wrap(
-                            children: [
-                              Image.asset(
-                                user.posts[0].reactLogo,
-                                width: 20,
-                                height: 20,
-                              ),
-                              Text('${user.posts[0].reactions}')
-                            ],
-                          ),
-                          Spacer(),
-                          Text('${user.posts[0].comments} comments'),
-                          SizedBox(width: 20),
-                          Text('${user.posts[0].shares} shares')
-                        ],
-                      ),
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton.icon(
-                          icon: Image.asset(
-                            'assets/icons/like.png',
-                            width: 14,
-                            height: 13,
-                          ),
-                          label: Text(
-                            "Like",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 78, 78, 78)),
-                          ),
-                          onPressed: () {},
-                        ),
-                        TextButton.icon(
-                          icon: Image.asset(
-                            'assets/icons/comment.png',
-                            width: 15,
-                            height: 13,
-                          ),
-                          label: Text("Comment"),
-                          onPressed: () {},
-                        ),
-                        TextButton.icon(
-                          icon: Image.asset(
-                            'assets/icons/send.png',
-                            width: 12,
-                            height: 13,
-                          ),
-                          label: Text("Send"),
-                          onPressed: () {},
-                        ),
-                        TextButton.icon(
-                          icon: Image.asset(
-                            'assets/icons/share.png',
-                            width: 15,
-                            height: 15,
-                          ),
-                          label: Text("Send"),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        )
-      ],
+    return Center(
+      child: Text(
+        'Newsfeed Page',
+        style: TextStyle(fontSize: 24),
+      ),
     );
   }
 }
 
+// every step i take
 class FriendsTab extends StatelessWidget {
   const FriendsTab({super.key});
 
@@ -512,8 +309,8 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      // crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.all(12),
@@ -632,244 +429,126 @@ class ProfileTab extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: const Color.fromARGB(255, 125, 125, 125), // Line color
-                width: 6.0, // Line thickness
-              ),
-            ),
-          ),
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Lord Bayron',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                Text('165 friends'),
-                Text(
-                  ' I am Batman!',
-                  style: TextStyle(fontSize: 18),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 120,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Stack(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/dprian.jpg',
-                                    width: 40,
-                                    height: 40,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Icon(
-                                    Icons.play_arrow_rounded,
-                                    color: Colors.white,
-                                    size: 27,
-                                  ),
-                                ],
-                              ),
-                              Wrap(direction: Axis.vertical, children: [
-                                Text(
-                                  'Insanity',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                Text(
-                                  'DPR IAN',
-                                  style: TextStyle(fontSize: 13),
-                                ),
-                              ]),
-                            ]),
-                      ),
-                      Icon(Icons.keyboard_control_sharp)
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.blue),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'Add to story',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.grey),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.edit,
-                              size: 20,
-                            ),
-                            SizedBox(width: 4),
-                            Text('Edit profile')
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.grey),
-                        child: Icon(
-                          Icons.keyboard_control,
-                        )),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 25),
+          margin: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.grey, // Line color
-                      width: 1.0, // Line thickness
-                    ),
-                  ),
-                ),
-                // color: const Color.fromARGB(255, 95, 110, 122),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(7),
-                      alignment: Alignment.center,
-                      width: 75,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 169, 188, 201),
-                      ),
-                      child: Text(
-                        'Posts',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: const Color.fromARGB(255, 0, 42, 76)),
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      'Photos',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      'Videos',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ],
-                ),
+              Text(
+                'Lord Bayron',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: Text(
-                  'Details',
-                  style: TextStyle(fontSize: 22),
-                ),
-              ),
-              Row(
-                children: [
-                  SizedBox(width: 5),
-                  Image.asset(
-                    'assets/icons/ig.png',
-                    width: 17,
-                    height: 17,
-                    color: Colors.black,
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    'Usernotfound000',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(
-                    Icons.school,
-                    // size: 25,
-                  ),
-                  SizedBox(width: 15),
-                  Text('Studied at University of Mindanao'),
-                ],
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(Icons.home_rounded),
-                  SizedBox(width: 15),
-                  RichText(
-                      text: TextSpan(text: 'Lives in ', children: [
-                    TextSpan(
-                        text: 'Davao City',
-                        style: TextStyle(fontWeight: FontWeight.bold))
-                  ])),
-                ],
+              Text('165 friends'),
+              Text(
+                ' I am Batman!',
+                style: TextStyle(fontSize: 18),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.keyboard_control_outlined),
-                    SizedBox(width: 15),
-                    Text('See Lord Bayron\'s About Info')
+                    SizedBox(
+                      width: 120,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              children: [
+                                Image.asset(
+                                  'assets/images/dprian.jpg',
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                                Icon(
+                                  Icons.play_arrow_rounded,
+                                  color: Colors.white,
+                                  size: 27,
+                                ),
+                              ],
+                            ),
+                            Wrap(direction: Axis.vertical, children: [
+                              Text(
+                                'Insanity',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              Text(
+                                'DPR IAN',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ]),
+                          ]),
+                    ),
+                    Icon(Icons.keyboard_control_sharp)
                   ],
                 ),
-              )
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.blue),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      'Add to story',
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 20,
+                          ),
+                          SizedBox(width: 4),
+                          Text('Edit profile')
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey),
+                      child: Icon(
+                        Icons.keyboard_control,
+                      )),
+                ],
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
 }
 
+// NO!tifications
 class NotificationsTab extends StatelessWidget {
   const NotificationsTab({super.key});
 
